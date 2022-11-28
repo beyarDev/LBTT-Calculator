@@ -1,0 +1,22 @@
+{
+  "name": "lbtt-calculator",
+  "version": "1.0.0",
+  "description": "a small project to calculate land and building transaction tax",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beyarDev/LBTT-Calculator.git"
+  },
+  "author": "Beyar Alhaji",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/beyarDev/LBTT-Calculator/issues"
+  },
+  "homepage": "https://github.com/beyarDev/LBTT-Calculator#readme",
+  "devDependencies": {
+    "jest": "^29.3.1"
+  }
+}
