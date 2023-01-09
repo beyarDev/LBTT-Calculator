@@ -1,36 +1,37 @@
-function taxDue(tax) {
-    return `£${tax} tax due`;
+function calculateLBTT(housePrice) {
+  let tax = 0;
+  const threshold = 145_000;
+  const band1 = 250_000;
+  const band1TaxPercentage = 2
+  const band2 = 325_000;
+  const band2TaxPercentage = 5
+  const band3 = 750_000;
+  const band3TaxPercentage = 10
+  const finalBand = 12
+  const band1FullTax = ((band1-threshold) * band1TaxPercentage)/100 // 2100
+  const band2FullTax = ((band2-band1) *band2TaxPercentage)/100 // 3750
+  const band3FullTax = ((band3-band2) *band3TaxPercentage)/100 // 42500
+  if (housePrice <= threshold) {
+    return tax;
+  } else if (housePrice <= band1) {
+    const taxableAmount = housePrice - threshold;
+    tax = (taxableAmount * band1TaxPercentage) / 100;
+    return tax;
+  } else if (housePrice <= band2) {
+    const taxableAmount = housePrice - band1;
+    tax = (taxableAmount * band2TaxPercentage) / 100;
+    tax += band1FullTax
+    return tax;
+  } else if (housePrice <= band3) {
+    const taxableAmount = housePrice - band2;
+    tax = (taxableAmount * band3TaxPercentage) / 100;
+    tax += band1FullTax + band2FullTax
+    return tax;
   }
-  function calculateLBTT(price) {
-    let tax = 0;
-    if (price <= 145000) {
-      return taxDue(0);
-    } else if (price <= 250000) {
-      const taxableAmount = price - 145000;
-      tax = (taxableAmount * 2) / 100;
-      return taxDue(tax);
-    } else if (price <= 325000) {
-      const taxableAmount = price - 250000;
-      tax = (taxableAmount * 5) / 100;
-      //tax += ((250000-145000) * 2)/100 or
-      tax += 2100;
-      return taxDue(tax);
-    } else if (price <= 750000) {
-      const taxableAmount = price - 325000;
-      tax = (taxableAmount * 10) / 100;
-      tax += 2100;
-      //tax += ((325000-250000) *5)/100 or
-      tax += 3750;
-      return taxDue(tax);
-    }
-    const taxableAmount = price - 750000;
-    tax = (taxableAmount * 12) / 100;
-    tax += 2100 + 3750;
-    //tax += ((750000-325000) *10)/100 or
-    tax += 42500;
-    return taxDue(tax);
-  }
-  
+  const taxableAmount = housePrice - band3;
+  tax = (taxableAmount * finalBand) / 100;
+  tax += band1FullTax + band2FullTax + band3FullTax
+  return tax;
+}
 
-
-module.exports = {calculateLBTT}
+module.exports = { calculateLBTT };
